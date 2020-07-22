@@ -42,8 +42,8 @@ version 3. See Copyright Notices in bee2/info.h.
 
 word zzAdd(word c[], const word a[], const word b[], size_t n)
 {
-	  word carry = 0;
-	  word w;
+	register word carry = 0;
+	register word w;
 	size_t i;
 	ASSERT(wwIsSameOrDisjoint(a, c, n));
 	ASSERT(wwIsSameOrDisjoint(b, c, n));
@@ -68,8 +68,8 @@ word zzAdd(word c[], const word a[], const word b[], size_t n)
 
 word zzAdd2(word b[], const word a[], size_t n)
 {
-	  word carry = 0;
-	  word w;
+	register word carry = 0;
+	register word w;
 	size_t i;
 	ASSERT(wwIsSameOrDisjoint(a, b, n));
 	for (i = 0; i < n; ++i)
@@ -104,7 +104,7 @@ word zzAdd3(word c[], const word a[], size_t n, const word b[], size_t m)
 	return zzAdd(c, a, b, n);
 }
 
-word zzAddW(word b[], const word a[], size_t n,   word w)
+word zzAddW(word b[], const word a[], size_t n, register word w)
 {
 	size_t i;
 	ASSERT(wwIsSameOrDisjoint(a, b, n));
@@ -117,7 +117,7 @@ word zzAddW(word b[], const word a[], size_t n,   word w)
 	return w;
 }
 
-word zzAddW2(word a[], size_t n,   word w)
+word zzAddW2(word a[], size_t n, register word w)
 {
 	size_t i;
 	ASSERT(wwIsValid(a, n));
@@ -134,9 +134,9 @@ word zzAddW2(word a[], size_t n,   word w)
 bool_t SAFE(zzIsSumEq)(const word c[], const word a[], const word b[], 
 	size_t n)
 {
-	  word diff = 0;
-	  word carry = 0;
-	  word w;
+	register word diff = 0;
+	register word carry = 0;
+	register word w;
 	size_t i;
 	ASSERT(wwIsValid(a, n));
 	ASSERT(wwIsValid(b, n));
@@ -155,8 +155,8 @@ bool_t SAFE(zzIsSumEq)(const word c[], const word a[], const word b[],
 bool_t FAST(zzIsSumEq)(const word c[], const word a[], const word b[], 
 	size_t n)
 {
-	  word carry = 0;
-	  word w;
+	register word carry = 0;
+	register word w;
 	size_t i;
 	ASSERT(wwIsValid(a, n));
 	ASSERT(wwIsValid(b, n));
@@ -178,9 +178,9 @@ bool_t FAST(zzIsSumEq)(const word c[], const word a[], const word b[],
 }
 
 bool_t SAFE(zzIsSumWEq)(const word b[], const word a[], size_t n, 
-	  word w)
+	register word w)
 {
-	  word diff = 0;
+	register word diff = 0;
 	size_t i;
 	ASSERT(wwIsValid(a, n));
 	ASSERT(wwIsValid(b, n));
@@ -193,7 +193,7 @@ bool_t SAFE(zzIsSumWEq)(const word b[], const word a[], size_t n,
 }
 
 bool_t FAST(zzIsSumWEq)(const word b[], const word a[], size_t n, 
-	  word w)
+	register word w)
 {
 	size_t i;
 	ASSERT(wwIsValid(a, n));
@@ -212,8 +212,8 @@ bool_t FAST(zzIsSumWEq)(const word b[], const word a[], size_t n,
 
 word zzSub(word c[], const word a[], const word b[], size_t n)
 {
-	  word borrow = 0;
-	  word w;
+	register word borrow = 0;
+	register word w;
 	size_t i;
 	ASSERT(wwIsSameOrDisjoint(a, c, n));
 	ASSERT(wwIsSameOrDisjoint(b, c, n));
@@ -238,8 +238,8 @@ word zzSub(word c[], const word a[], const word b[], size_t n)
 
 word zzSub2(word b[], const word a[], size_t n)
 {
-	  word borrow = 0;
-	  word w;
+	register word borrow = 0;
+	register word w;
 	size_t i;
 	ASSERT(wwIsSameOrDisjoint(a, b, n));
 	for (i = 0; i < n; ++i)
@@ -262,7 +262,7 @@ word zzSub2(word b[], const word a[], size_t n)
 	return borrow;
 }
 
-word zzSubW(word b[], const word a[], size_t n,   word w)
+word zzSubW(word b[], const word a[], size_t n, register word w)
 {
 	size_t i;
 	ASSERT(wwIsSameOrDisjoint(a, b, n));
@@ -275,7 +275,7 @@ word zzSubW(word b[], const word a[], size_t n,   word w)
 	return w;
 }
 
-word zzSubW2(word a[], size_t n,   word w)
+word zzSubW2(word a[], size_t n, register word w)
 {
 	size_t i;
 	ASSERT(wwIsValid(a, n));

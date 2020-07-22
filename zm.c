@@ -475,7 +475,7 @@ static size_t zmSqrMont_deep(size_t n)
 
 static void zmInvMont(word b[], const word a[], const qr_o* r, void* stack)
 {
-	  size_t k;
+	register size_t k;
 	ASSERT(zmIsOperable(r));
 	ASSERT(zmIsIn(a, r));
 	// b <- a^{-1} 2^k \mod mod
@@ -651,7 +651,7 @@ typedef struct
 static void zmMulMont2(word c[], const word a[], const word b[],
 	const qr_o* r, void* stack)
 {
-	  size_t k;
+	register size_t k;
 	const zm_mont_params_st* params;
 	word* prod = (word*)stack;
 	// pre
@@ -679,7 +679,7 @@ static size_t zmMulMont2_deep(size_t n)
 
 static void zmSqrMont2(word b[], const word a[], const qr_o* r, void* stack)
 {
-	  size_t k;
+	register size_t k;
 	const zm_mont_params_st* params;
 	word* prod = (word*)stack;
 	// pre
@@ -706,7 +706,7 @@ static size_t zmSqrMont2_deep(size_t n)
 
 static void zmInvMont2(word b[], const word a[], const qr_o* r, void* stack)
 {
-	  size_t k;
+	register size_t k;
 	const zm_mont_params_st* params;
 	ASSERT(zmIsOperable(r));
 	ASSERT(zmIsIn(a, r));

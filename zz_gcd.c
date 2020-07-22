@@ -92,7 +92,7 @@ version 3. See Copyright Notices in bee2/info.h.
 void zzGCD(word d[], const word a[], size_t n, const word b[], size_t m,
 	void* stack)
 {
-	  size_t s;
+	register size_t s;
 	// переменные в stack
 	word* u = (word*)stack;
 	word* v = u + n;
@@ -204,9 +204,9 @@ size_t zzLCM_deep(size_t n, size_t m)
 int zzExGCD(word d[], word da[], word db[], const word a[], size_t n,
 	const word b[], size_t m, void* stack)
 {
-	  size_t s;
-	  size_t nu, mv;
-	  int sign0 = 0, sign = 1;
+	register size_t s;
+	register size_t nu, mv;
+	register int sign0 = 0, sign = 1;
 	// переменные в stack
 	word* aa = (word*)stack;
 	word* bb = aa + n;
@@ -363,8 +363,8 @@ size_t zzExGCD_deep(size_t n, size_t m)
 void zzDivMod(word b[], const word divident[], const word a[],
 	const word mod[], size_t n, void* stack)
 {
-	  size_t nu, nv;
-	  int sign0 = 0, sign = 1;
+	register size_t nu, nv;
+	register int sign0 = 0, sign = 1;
 	// переменные в stack
 	word* u = (word*)stack;
 	word* v = u + n;
@@ -515,7 +515,7 @@ a и mod < 2^m, причем условие a < mod может нарушать�
 size_t zzAlmostInvMod(word b[], const word a[], const word mod[], size_t n,
 	void* stack)
 {
-	  size_t k = 0;
+	register size_t k = 0;
 	size_t nu, nv;
 	// переменные в stack
 	word* u = (word*)stack;

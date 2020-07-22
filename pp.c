@@ -791,10 +791,10 @@ static size_t ppMul9_deep()
 *******************************************************************************
 */
 
-word ppMulW(word b[], const word a[], size_t n,   word w, 
+word ppMulW(word b[], const word a[], size_t n, register word w, 
 	void* stack)
 {
-	  word carry = 0;
+	register word carry = 0;
 	size_t i;
 	word* t = (word*)stack;
 	ASSERT(wwIsSameOrDisjoint(a, b, n));
@@ -815,10 +815,10 @@ size_t ppMulW_deep(size_t n)
 	return O_OF_W(16 + 2);
 }
 
-word ppAddMulW(word b[], const word a[], size_t n,   word w, 
+word ppAddMulW(word b[], const word a[], size_t n, register word w, 
 	void* stack)
 {
-	  word carry = 0;
+	register word carry = 0;
 	size_t i;
 	word* t = (word*)stack;
 	ASSERT(wwIsSameOrDisjoint(a, b, n));
@@ -1238,8 +1238,8 @@ size_t ppSqr_deep(size_t n)
 void ppDiv(word q[], word r[], const word a[], size_t n, const word b[],
 	size_t m, void* stack)
 {
-	  word dividentHi;
-	  size_t shift;
+	register word dividentHi;
+	register size_t shift;
 	size_t i;
 	// переменные в stack
 	word* divident;		/* нормализованное делимое (n + 1 слово) */
@@ -1315,9 +1315,9 @@ size_t ppDiv_deep(size_t n, size_t m)
 void ppMod(word r[], const word a[], size_t n, const word b[], size_t m,
 	void* stack)
 {
-	  word dividentHi;
-	  word tmp;
-	  size_t shift;
+	register word dividentHi;
+	register word tmp;
+	register size_t shift;
 	size_t i;
 	// переменные в stack
 	word* divident;		/* нормализованное делимое (n + 1 слово) */
@@ -1438,7 +1438,7 @@ size_t ppMod_deep(size_t n, size_t m)
 void ppGCD(word d[], const word a[], size_t n, const word b[], size_t m,
 	void* stack)
 {
-	  size_t s;
+	register size_t s;
 	// переменные в stack
 	word* u = (word*)stack;
 	word* v = u + n;
@@ -1491,7 +1491,7 @@ size_t ppGCD_deep(size_t n, size_t m)
 void ppExGCD(word d[], word da[], word db[], const word a[], size_t n,
 	const word b[], size_t m, void* stack)
 {
-	  size_t s;
+	register size_t s;
 	size_t nu, mv;
 	// переменные в stack
 	word* aa = (word*)stack;
@@ -1764,7 +1764,7 @@ size_t ppRed_deep(size_t n)
 
 void ppRedTrinomial(word a[], const pp_trinom_st* p)
 {
-	  word hi;
+	register word hi;
 	size_t mb, mw, kb, kw;
 	size_t n;
 	// pre
@@ -1802,7 +1802,7 @@ void ppRedTrinomial(word a[], const pp_trinom_st* p)
 
 void ppRedPentanomial(word a[], const pp_pentanom_st* p)
 {
-	  word hi;
+	register word hi;
 	size_t mb, mw, l1b, l1w, lb, lw, kb, kw;
 	size_t n;
 	// pre

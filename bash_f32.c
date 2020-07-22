@@ -32,8 +32,8 @@ version 3. See Copyright Notices in bee2/info.h.
 /* w <- Interleaving(w) */
 static void u32x2Inter(u32 w[2])
 {
-	  u32 t0 = u32Deshuffle(w[0]);
-	  u32 t1 = u32Deshuffle(w[1]);
+	register u32 t0 = u32Deshuffle(w[0]);
+	register u32 t1 = u32Deshuffle(w[1]);
 	w[0] = (t0 & 0x0000FFFF) | (t1 << 16);
 	w[1] = (t0 >> 16) | (t1 & 0xFFFF0000);
 	t0 = t1 = 0;
@@ -42,7 +42,7 @@ static void u32x2Inter(u32 w[2])
 /* w <- Deinterleaving(w) */
 static void u32x2Deinter(u32 w[2])
 {
-	  u32 t = (w[0] & 0x0000FFFF) | (w[1] << 16);
+	register u32 t = (w[0] & 0x0000FFFF) | (w[1] << 16);
 	w[1] = u32Shuffle((w[0] >> 16) | (w[1] & 0xFFFF0000));
 	w[0] = u32Shuffle(t);
 	t = 0;

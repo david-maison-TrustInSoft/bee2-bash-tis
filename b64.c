@@ -95,7 +95,7 @@ bool_t b64IsValid(const char* b64)
 
 void b64From(char* dest, const void* src, size_t count)
 {
-	  u32 block;
+	register u32 block;
 	ASSERT(memIsDisjoint2(src, count, dest, 4 * ((count + 2) / 3) + 1));
 	for (; count >= 3; count -= 3)
 	{
@@ -133,7 +133,7 @@ void b64From(char* dest, const void* src, size_t count)
 
 void b64To(void* dest, size_t* count, const char* src)
 {
-	  u32 block;
+	register u32 block;
 	size_t len;
 	ASSERT(b64IsValid(src));
 	ASSERT(memIsValid(count, sizeof(size_t)));

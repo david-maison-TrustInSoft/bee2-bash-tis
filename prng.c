@@ -215,7 +215,7 @@ void prngSTBStart(void* state, const u16 z[31])
 
 void prngSTBStepR(void* buf, size_t count, void* state)
 {
-	  u16 u;
+	register u16 u;
 	prng_stb_st* s = (prng_stb_st*)state;
 	// pre
 	ASSERT(memIsValid(s, sizeof(prng_stb_st)));

@@ -44,7 +44,7 @@ typedef struct
 
 static void gf2RedTrinomial0(word a[], size_t n, const gf2_trinom_st* p)
 {
-	  word hi;
+	register word hi;
 	// pre
 	ASSERT(wwIsValid(a, 2 * n));
 	ASSERT(memIsValid(p, sizeof(*p)));
@@ -78,7 +78,7 @@ static void gf2RedTrinomial0(word a[], size_t n, const gf2_trinom_st* p)
 
 static void gf2RedTrinomial1(word a[], size_t n, const gf2_trinom_st* p)
 {
-	  word hi;
+	register word hi;
 	// pre
 	ASSERT(wwIsValid(a, 2 * n));
 	ASSERT(memIsValid(p, sizeof(*p)));
@@ -144,7 +144,7 @@ typedef struct
 
 static void gf2RedPentanomial(word a[], size_t n, const gf2_pentanom_st* p)
 {
-	  word hi;
+	register word hi;
 	// pre
 	ASSERT(wwIsValid(a, 2 * n));
 	ASSERT(memIsValid(p, sizeof(*p)));

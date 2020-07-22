@@ -160,7 +160,7 @@ void memFree(void* buf)
 
 bool_t SAFE(memEq)(const void* buf1, const void* buf2, size_t count)
 {
-	  word diff = 0;
+	register word diff = 0;
 	ASSERT(memIsValid(buf1, count));
 	ASSERT(memIsValid(buf2, count));
 	for (; count >= O_PER_W; count -= O_PER_W)
@@ -187,10 +187,10 @@ bool_t FAST(memEq)(const void* buf1, const void* buf2, size_t count)
 
 int SAFE(memCmp)(const void* buf1, const void* buf2, size_t count)
 {
-	  word less = 0;
-	  word greater = 0;
-	  word w1;
-	  word w2;
+	register word less = 0;
+	register word greater = 0;
+	register word w1;
+	register word w2;
 	ASSERT(memIsValid(buf1, count));
 	ASSERT(memIsValid(buf2, count));
 	if (count % O_PER_W)
@@ -252,7 +252,7 @@ void memWipe(void* buf, size_t count)
 
 bool_t SAFE(memIsZero)(const void* buf, size_t count)
 {
-	  word diff = 0;
+	register word diff = 0;
 	ASSERT(memIsValid(buf, count));
 	for (; count >= O_PER_W; count -= O_PER_W)
 	{
@@ -290,7 +290,7 @@ size_t memNonZeroSize(const void* buf, size_t count)
 
 bool_t SAFE(memIsRep)(const void* buf, size_t count, octet o)
 {
-	  word diff = 0;
+	register word diff = 0;
 	ASSERT(memIsValid(buf, count));
 	for (; count--; buf = (const octet*)buf + 1)
 		diff |= *(const octet*)buf ^ o;
@@ -356,7 +356,7 @@ bool_t memIsDisjoint4(const void* buf1, size_t count1,
 void memJoin(void* dest, const void* src1, size_t count1, const void* src2,
 	size_t count2)
 {
-	  octet o;
+	register octet o;
 	size_t i;
 	ASSERT(memIsValid(src1, count1));
 	ASSERT(memIsValid(src2, count2));
@@ -475,7 +475,7 @@ void memSwap(void* buf1, void* buf2, size_t count)
 
 void memRev(void* buf, size_t count)
 {
-	  size_t i = count / 2;
+	register size_t i = count / 2;
 	ASSERT(memIsValid(buf, count));
 	while (i--)
 	{

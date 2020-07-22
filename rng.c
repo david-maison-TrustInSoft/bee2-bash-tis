@@ -211,7 +211,7 @@ static bool_t rngHasTimer()
 
 static err_t rngReadTimer(size_t* read, void* buf, size_t count)
 {
-	  tm_ticks_t ticks;
+	register tm_ticks_t ticks;
 	size_t i, j;
 	// pre
 	ASSERT(memIsValid(read, sizeof(size_t)));

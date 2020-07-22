@@ -56,7 +56,7 @@ void u32Rev2(u32 buf[], size_t count)
 *******************************************************************************
 */
 
-size_t u32Weight(  u32 w)
+size_t u32Weight(register u32 w)
 {
 	w -= ((w >> 1) & 0x55555555);
 	w = (w & 0x33333333) + ((w >> 2) & 0x33333333);
@@ -66,7 +66,7 @@ size_t u32Weight(  u32 w)
 	return (size_t)(w & 0x0000003F);
 }
 
-bool_t u32Parity(  u32 w)
+bool_t u32Parity(register u32 w)
 {
 	w ^= w >> 1;
 	w ^= w >> 2;
@@ -91,15 +91,15 @@ bool_t u32Parity(  u32 w)
 *******************************************************************************
 */
 
-size_t SAFE(u32CTZ)(  u32 w)
+size_t SAFE(u32CTZ)(register u32 w)
 {
 	return 32 - u32Weight(w | (U32_0 - w));
 }
 
-size_t FAST(u32CTZ)(  u32 w)
+size_t FAST(u32CTZ)(register u32 w)
 {
-	  size_t l = 32;
-	  u32 t;
+	register size_t l = 32;
+	register u32 t;
 	// дихотомия
 	if (t = w << 16)
 		l -= 16, w = t;
@@ -114,7 +114,7 @@ size_t FAST(u32CTZ)(  u32 w)
 	return ((u32)(w << 1)) ? l - 2 : l - (w ? 1 : 0);
 }
 
-size_t SAFE(u32CLZ)(  u32 w)
+size_t SAFE(u32CLZ)(register u32 w)
 {
 	w = w | w >> 1;
 	w = w | w >> 2;
@@ -124,10 +124,10 @@ size_t SAFE(u32CLZ)(  u32 w)
 	return u32Weight(~w);
 }
 
-size_t FAST(u32CLZ)(  u32 w)
+size_t FAST(u32CLZ)(register u32 w)
 {
-	  size_t l = 32;
-	  u32 t;
+	register size_t l = 32;
+	register u32 t;
 	// дихотомия
 	if (t = w >> 16)
 		l -= 16, w = t;
@@ -150,9 +150,9 @@ size_t FAST(u32CLZ)(  u32 w)
 *******************************************************************************
 */
 
-u32 u32Shuffle(  u32 w)
+u32 u32Shuffle(register u32 w)
 {
-	  u32 t;
+	register u32 t;
 	t = (w ^ (w >> 8)) & 0x0000FF00, w ^= t ^ (t << 8);
 	t = (w ^ (w >> 4)) & 0x00F000F0, w ^= t ^ (t << 4);
 	t = (w ^ (w >> 2)) & 0x0C0C0C0C, w ^= t ^ (t << 2);
@@ -161,9 +161,9 @@ u32 u32Shuffle(  u32 w)
 	return w;
 }
 
-u32 u32Deshuffle(  u32 w)
+u32 u32Deshuffle(register u32 w)
 {
-	  u32 t;
+	register u32 t;
 	t = (w ^ (w >> 1)) & 0x22222222, w ^= t ^ (t << 1);
 	t = (w ^ (w >> 2)) & 0x0C0C0C0C, w ^= t ^ (t << 2);
 	t = (w ^ (w >> 4)) & 0x00F000F0, w ^= t ^ (t << 4);
@@ -190,9 +190,9 @@ u32 u32Deshuffle(  u32 w)
 *******************************************************************************
 */
 
-u32 u32NegInv(  u32 w)
+u32 u32NegInv(register u32 w)
 {
-	  u32 ret = w;
+	register u32 ret = w;
 	ASSERT(w & 1);
 	// для t = 1,...,k: ret <- ret * (w * ret + 2)
 	ret = ret * (w * ret + 2);
@@ -232,7 +232,7 @@ void u32To(void* dest, size_t count, const u32 src[])
 	if (count % 4)
 	{
 		size_t t = count / 4;
-		  u32 u = src[t];
+		register u32 u = src[t];
 		for (t *= 4; t < count; ++t, u >>= 8)
 			((octet*)dest)[t] = (octet)u;
 	}

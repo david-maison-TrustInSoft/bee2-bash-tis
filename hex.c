@@ -53,8 +53,8 @@ static const octet hex_dec_table[256] = {
 
 static octet hexToO(const char* hex)
 {
-	  octet hi;
-	  octet lo;
+	register octet hi;
+	register octet lo;
 	ASSERT(memIsValid(hex, 2));
 	hi = hex_dec_table[(octet)hex[0]];
 	lo = hex_dec_table[(octet)hex[1]];
@@ -62,7 +62,7 @@ static octet hexToO(const char* hex)
 	return hi << 4 | lo;
 }
 
-static void hexFromOUpper(char* hex,   octet o)
+static void hexFromOUpper(char* hex, register octet o)
 {
 	ASSERT(memIsValid(hex, 2));
 	hex[0] = hex_upper[o >> 4];
@@ -70,7 +70,7 @@ static void hexFromOUpper(char* hex,   octet o)
 	o = 0;
 }
 
-static void hexFromOLower(char* hex,   octet o)
+static void hexFromOLower(char* hex, register octet o)
 {
 	ASSERT(memIsValid(hex, 2));
 	hex[0] = hex_lower[o >> 4];
@@ -122,7 +122,7 @@ void hexLower(char* hex)
 
 bool_t SAFE(hexEq)(const void* buf, const char* hex)
 {
-	  word diff = 0;
+	register word diff = 0;
 	size_t count;
 	ASSERT(hexIsValid(hex));
 	ASSERT(memIsValid(buf, strLen(hex) / 2));
@@ -146,7 +146,7 @@ bool_t FAST(hexEq)(const void* buf, const char* hex)
 
 bool_t SAFE(hexEqRev)(const void* buf, const char* hex)
 {
-	  word diff = 0;
+	register word diff = 0;
 	size_t count;
 	ASSERT(hexIsValid(hex));
 	ASSERT(memIsValid(buf, strLen(hex) / 2));

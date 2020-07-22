@@ -50,10 +50,10 @@ bool_t zzIsOdd(const word a[], size_t n)
 *******************************************************************************
 */
 
-void zzAddAndW(word b[], const word a[], size_t n,   word w)
+void zzAddAndW(word b[], const word a[], size_t n, register word w)
 {
-	  word carry = 0;
-	  word prod;
+	register word carry = 0;
+	register word prod;
 	size_t i;
 	ASSERT(wwIsSameOrDisjoint(a, b, n));
 	for (i = 0; i < n; ++i)
@@ -67,10 +67,10 @@ void zzAddAndW(word b[], const word a[], size_t n,   word w)
 	prod = w = carry = 0;
 }
 
-word zzSubAndW(word b[], const word a[], size_t n,   word w)
+word zzSubAndW(word b[], const word a[], size_t n, register word w)
 {
-	  word borrow = 0;
-	  word prod;
+	register word borrow = 0;
+	register word prod;
 	size_t i;
 	ASSERT(wwIsSameOrDisjoint(a, b, n));
 	for (i = 0; i < n; ++i)
@@ -107,8 +107,8 @@ Handbook of Applied Cryptography] в редакции CТБ 34.101.45 (прил�
 
 int zzJacobi(const word a[], size_t n, const word b[], size_t m, void* stack)
 {
-	  int t = 1;
-	  size_t s;
+	register int t = 1;
+	register size_t s;
 	// переменные в stack
 	word* u = (word*)stack;
 	word* v = u + n;
@@ -191,7 +191,7 @@ size_t zzJacobi_deep(size_t n, size_t m)
 
 bool_t zzSqrt(word b[], const word a[], size_t n, void* stack)
 {
-	  int cmp;
+	register int cmp;
 	size_t m = (n + 1) / 2;
 	word* t = (word*)stack;
 	word* r = t + m + 1;

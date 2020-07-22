@@ -38,7 +38,7 @@ void wwSwap(word a[], word b[], size_t n)
 
 bool_t SAFE(wwEq)(const word a[], const word b[], size_t n)
 {
-	  word diff = 0;
+	register word diff = 0;
 	ASSERT(wwIsValid(a, n) && wwIsValid(b, n));
 	while (n--)
 		diff |= a[n] ^ b[n];
@@ -56,8 +56,8 @@ bool_t FAST(wwEq)(const word a[], const word b[], size_t n)
 
 int SAFE(wwCmp)(const word a[], const word b[], size_t n)
 {
-	  word less = 0;
-	  word greater = 0;
+	register word less = 0;
+	register word greater = 0;
 	ASSERT(wwIsValid(a, n) && wwIsValid(b, n));
 	while (n--)
 	{
@@ -80,18 +80,18 @@ int FAST(wwCmp)(const word a[], const word b[], size_t n)
 
 int SAFE(wwCmp2)(const word a[], size_t n, const word b[], size_t m)
 {
-	  int ret;
+	register int ret;
 	ASSERT(wwIsValid(a, n) && wwIsValid(b, m));
 	if (n > m)
 	{
-		  int z = wwIsZero(a + m, n - m);
+		register int z = wwIsZero(a + m, n - m);
 		ret = wwCmp(a, b, m);
 		ret = -z & ret | (z - 1) & 1;
 		z = 0;
 	}
 	else if (n < m)
 	{
-		  int z = wwIsZero(b + n, m - n);
+		register int z = wwIsZero(b + n, m - n);
 		ret = wwCmp(a, b, n);
 		ret = -z & ret | (z - 1) & -1;
 		z = 0;
@@ -111,15 +111,15 @@ int FAST(wwCmp2)(const word a[], size_t n, const word b[], size_t m)
 	return FAST(wwCmp)(a, b, m);
 }
 
-int SAFE(wwCmpW)(const word a[], size_t n,   word w)
+int SAFE(wwCmpW)(const word a[], size_t n, register word w)
 {
-	  int ret;
+	register int ret;
 	ASSERT(wwIsValid(a, n));
 	if (n == 0)
 		ret = wordEq(w, 0) - 1;
 	else
 	{
-		  int z = wwIsZero(a + 1, n - 1);
+		register int z = wwIsZero(a + 1, n - 1);
 		ret = -wordLess(a[0], w) & -1 | -wordGreater(a[0], w) & 1;
 		ret = -z & ret | (z - 1) & 1;
 		z = 0;
@@ -128,9 +128,9 @@ int SAFE(wwCmpW)(const word a[], size_t n,   word w)
 	return ret;
 }
 
-int FAST(wwCmpW)(const word a[], size_t n,   word w)
+int FAST(wwCmpW)(const word a[], size_t n, register word w)
 {
-	  int cmp;
+	register int cmp;
 	ASSERT(wwIsValid(a, n));
 	if (n == 0)
 		cmp = (w ? -1 : 0);
@@ -173,7 +173,7 @@ void wwSetZero(word a[], size_t n)
 		a[n] = 0;
 }
 
-void wwSetW(word a[], size_t n,   word w)
+void wwSetW(word a[], size_t n, register word w)
 {
 	ASSERT(wwIsValid(a, n));
 	if (n)
@@ -183,7 +183,7 @@ void wwSetW(word a[], size_t n,   word w)
 	w = 0;
 }
 
-void wwRepW(word a[], size_t n,   word w)
+void wwRepW(word a[], size_t n, register word w)
 {
 	ASSERT(wwIsValid(a, n));
 	if (n)
@@ -195,7 +195,7 @@ void wwRepW(word a[], size_t n,   word w)
 
 bool_t SAFE(wwIsZero)(const word a[], size_t n)
 {
-	  word diff = 0;
+	register word diff = 0;
 	ASSERT(wwIsValid(a, n));
 	while (n--)
 		diff |= a[n];
@@ -211,9 +211,9 @@ bool_t FAST(wwIsZero)(const word a[], size_t n)
 	return TRUE;
 }
 
-bool_t SAFE(wwIsW)(const word a[], size_t n,   word w)
+bool_t SAFE(wwIsW)(const word a[], size_t n, register word w)
 {
-	  bool_t ret;
+	register bool_t ret;
 	ASSERT(wwIsValid(a, n));
 	if (n == 0)
 		ret = wordEq(w, 0);
@@ -227,9 +227,9 @@ bool_t SAFE(wwIsW)(const word a[], size_t n,   word w)
 	return ret;
 }
 
-bool_t FAST(wwIsW)(const word a[], size_t n,   word w)
+bool_t FAST(wwIsW)(const word a[], size_t n, register word w)
 {
-	  bool_t ret;
+	register bool_t ret;
 	ASSERT(wwIsValid(a, n));
 	if (n == 0)
 		ret = (w == 0);
@@ -243,9 +243,9 @@ bool_t FAST(wwIsW)(const word a[], size_t n,   word w)
 	return ret;
 }
 
-bool_t SAFE(wwIsRepW)(const word a[], size_t n,   word w)
+bool_t SAFE(wwIsRepW)(const word a[], size_t n, register word w)
 {
-	  bool_t ret;
+	register bool_t ret;
 	ASSERT(wwIsValid(a, n));
 	if (n == 0)
 		ret = wordEq(w, 0);
@@ -259,9 +259,9 @@ bool_t SAFE(wwIsRepW)(const word a[], size_t n,   word w)
 	return ret;
 }
 
-bool_t FAST(wwIsRepW)(const word a[], size_t n,   word w)
+bool_t FAST(wwIsRepW)(const word a[], size_t n, register word w)
 {
-	  bool_t ret;
+	register bool_t ret;
 	ASSERT(wwIsValid(a, n));
 	if (n == 0)
 		ret = (w == 0);
@@ -316,7 +316,7 @@ bool_t wwTestBit(const word a[], size_t pos)
 
 word wwGetBits(const word a[], size_t pos, size_t width)
 {
-	  word ret;
+	register word ret;
 	size_t n = pos / B_PER_W;
 	ASSERT(wwIsValid(a, W_OF_B(pos + width)));
 	pos %= B_PER_W;
@@ -332,9 +332,9 @@ word wwGetBits(const word a[], size_t pos, size_t width)
 	return ret;
 }
 
-void wwSetBit(word a[], size_t pos,   bool_t val)
+void wwSetBit(word a[], size_t pos, register bool_t val)
 {
-	  word f;
+	register word f;
 	ASSERT(wwIsValid(a, W_OF_B(pos + 1)));
 	ASSERT(val == TRUE || val == FALSE);
 	f = WORD_0 - (word)val;
@@ -342,7 +342,7 @@ void wwSetBit(word a[], size_t pos,   bool_t val)
 	f = 0;
 }
 
-void wwSetBits(word a[], size_t pos, size_t width,   word val)
+void wwSetBits(word a[], size_t pos, size_t width, register word val)
 {
 	word mask = WORD_MAX;
 	size_t n = pos / B_PER_W;
@@ -374,7 +374,7 @@ void wwFlipBit(word a[], size_t pos)
 
 size_t wwLoZeroBits(const word a[], size_t n)
 {
-	  size_t i;
+	register size_t i;
 	ASSERT(wwIsValid(a, n));
 	// поиск младшего ненулевого машинного слова
 	for (i = 0; i < n && a[i] == 0; ++i);
@@ -387,7 +387,7 @@ size_t wwLoZeroBits(const word a[], size_t n)
 
 size_t wwHiZeroBits(const word a[], size_t n)
 {
-	  size_t i = n;
+	register size_t i = n;
 	ASSERT(wwIsValid(a, n));
 	// поиск старшего ненулевого машинного слова
 	while (i-- && a[i] == 0);
@@ -409,11 +409,11 @@ size_t wwNAF(word naf[], const word a[], size_t n, size_t w)
 	const word next_bit = WORD_BIT_POS(w);
 	const word hi_bit = next_bit >> 1;
 	const word mask = hi_bit - 1;
-	  word window;
-	  word digit;
-	  size_t naf_len = 0;
-	  size_t naf_size = 0;
-	  size_t a_len = wwBitSize(a, n);
+	register word window;
+	register word digit;
+	register size_t naf_len = 0;
+	register size_t naf_size = 0;
+	register size_t a_len = wwBitSize(a, n);
 	size_t i;
 	// pre
 	ASSERT(wwIsDisjoint2(a, n, naf, 2 * n + 1));
@@ -515,7 +515,7 @@ void wwShLo(word a[], size_t n, size_t shift)
 
 word wwShLoCarry(word a[], size_t n, size_t shift, word carry)
 {
-	  word ret = 0;
+	register word ret = 0;
 	ASSERT(wwIsValid(a, n));
 	if (shift < B_PER_W * (n + 1))
 	{
@@ -593,7 +593,7 @@ void wwShHi(word a[], size_t n, size_t shift)
 
 word wwShHiCarry(word a[], size_t n, size_t shift, word carry)
 {
-	  word ret = 0;
+	register word ret = 0;
 	ASSERT(wwIsValid(a, n));
 	if (shift < B_PER_W * (n + 1))
 	{

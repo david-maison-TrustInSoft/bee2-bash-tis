@@ -61,8 +61,8 @@ comparison of promoted ~unsigned with unsigned [-Werror=sign-compare].
 *******************************************************************************
 */
 
-void zzAddAndW(word b[], const word a[], size_t n,   word w);
-word zzSubAndW(word b[], const word a[], size_t n,   word w);
+void zzAddAndW(word b[], const word a[], size_t n, register word w);
+word zzSubAndW(word b[], const word a[], size_t n, register word w);
 
 /*
 *******************************************************************************
