@@ -6,7 +6,7 @@
 \author (C) Sergey Agievich [agievich@{bsu.by|gmail.com}]
 \created 2012.04.01
 \version 2019.06.18
-\license This program is released under the GNU General Public License 
+\license This program is released under the GNU General Public License
 version 3. See Copyright Notices in bee2/info.h.
 *******************************************************************************
 */
@@ -47,9 +47,9 @@ version 3. See Copyright Notices in bee2/info.h.
 функциях арифметики возникают с вероятностями, близкими к 1 / 2^B_PER_W.
 
 \remark При разборе платформ для определения порядка октетов использован код
-Брайана Гладмана (Brian Gladman, http://www.gladman.me.uk/). Дополнительная 
-платформа EMSCRIPTEN (https://emscripten.org) является виртуальной, на ней 
-выполняется компиляция в asm.js. 
+Брайана Гладмана (Brian Gladman, http://www.gladman.me.uk/). Дополнительная
+платформа EMSCRIPTEN (https://emscripten.org) является виртуальной, на ней
+выполняется компиляция в asm.js.
 
 \section defs-arrays Массивы
 
@@ -69,7 +69,7 @@ T == octet.
 Если обратиться к функции с нулевым out, то по адресу out_len будет
 размещена длина возвращаемого массива. При обращении с ненулевым out по
 адресу out_len должно быть указано число элементов типа T, зарезервированных
-в буфере out. В результате выполнения функции число по адресу out_len 
+в буфере out. В результате выполнения функции число по адресу out_len
 корректируется -- устанавливается равным актуальному числу элементов,
 записанных в массив out. Размера буфера может контролироваться предусловиями.
 О недостаточности размера функции может сообщать через коды возврата.
@@ -85,7 +85,7 @@ T == octet.
 
 Запись "f1() < f2()" означает, что функция f2() должна вызываться после f1().
 
-Запись "f1() < [f2()] < f3()" означает, что функция f2() должна вызываться 
+Запись "f1() < [f2()] < f3()" означает, что функция f2() должна вызываться
 после f1(), f3() после f2(), и вызов f2() может быть пропущен.
 
 Запись "f()*" означает, что функция f() может вызываться последовательно
@@ -270,9 +270,10 @@ T == octet.
 		typedef signed long i64;
 		#define U64_SUPPORT
 		#if defined(__GNUC__) && (__WORDSIZE == 64)
-			typedef __int128 i128;
-			typedef unsigned __int128 u128;
-			#define U128_SUPPORT
+            // XXX
+			//typedef __int128 i128;
+			//typedef unsigned __int128 u128;
+			//#define U128_SUPPORT
 		#endif
 	#else
 		#error "Unsupported int/long configuration"
@@ -282,9 +283,10 @@ T == octet.
 		#if !defined(ULLONG_MAX) || (ULLONG_MAX == 18446744073709551615ull)
 			#error "Unsupported int/long/long long configuration"
 		#elif (ULLONG_MAX == 340282366920938463463374607431768211455ull)
-			typedef unsigned long long u128;
-			typedef signed long long i128;
-			#define U128_SUPPORT
+            // XXX
+			//typedef unsigned long long u128;
+			//typedef signed long long i128;
+			//#define U128_SUPPORT
 		#else
 			#error "Unsupported int/long/long long configuration"
 		#endif
@@ -447,7 +449,7 @@ typedef u32 err_t;
 *******************************************************************************
 \brief Невозможное событие
 
-Событие, вероятность наступления которого <= 2^{-B_PER_IMPOSSIBLE}, считается 
+Событие, вероятность наступления которого <= 2^{-B_PER_IMPOSSIBLE}, считается
 невозможным.
 
 \remark Э. Борель: "событие, вероятность которого ниже
