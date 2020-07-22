@@ -1,2 +1,2 @@
 all:
-	gcc -fsanitize=address,undefined -Iinclude  -DBASH_PLATFORM=BASH_32 *.c
+	gcc -fsanitize=address,undefined -Iinclude  -DBASH_PLATFORM=BASH_32 *.c && ./a.out
