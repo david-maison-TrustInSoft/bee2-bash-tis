@@ -11,7 +11,7 @@
    (prin "{ ")
    (printsp "-no-results" ': "true")
    (prinl "} ,")
-   (printsp "compilation_cmd" ': "-Iinclude  -DBASH_PLATFORM=BASH_32")
+   (printsp "compilation_cmd" ': "-Iinclude -DU32_SUPPORT -DBASH_PLATFORM=BASH_32")
    (prinl ",")
    (printsp "main" ': (text F))
    (prinl)
