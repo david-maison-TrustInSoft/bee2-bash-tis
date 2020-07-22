@@ -192,7 +192,7 @@ u32 utilNonce32()
 {
 	tm_time_t curtime;
 	tm_ticks_t curticks;
-	register u32 state = 2166136261u;
+	  u32 state = 2166136261u;
 	// UNIX-время
 	curtime = tmTime();
 	state = utilFNV32(&curtime, sizeof(curtime), state);

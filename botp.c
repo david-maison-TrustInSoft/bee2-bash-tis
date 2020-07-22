@@ -61,8 +61,8 @@ static const u32 powers_of_10[10] = {
 
 void botpDT(char* otp, size_t digit, const octet mac[], size_t mac_len)
 {
-	register u32 pwd;
-	register size_t offset;
+	  u32 pwd;
+	  size_t offset;
 	ASSERT(mac_len >= 20);
 	ASSERT(4 <= digit && digit <= 9);
 	ASSERT(memIsValid(otp, digit + 1));
@@ -91,7 +91,7 @@ static void botpTimeToCtr(octet ctr[8], tm_time_t t)
 
 void botpCtrNext(octet ctr[8])
 {
-	register octet carry = 1;
+	  octet carry = 1;
 	ASSERT(memIsValid(ctr, 8));
 	carry = ((ctr[7] += carry) < carry);
 	carry = ((ctr[6] += carry) < carry);

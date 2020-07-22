@@ -41,7 +41,7 @@ bool_t decIsValid(const char* dec)
 
 size_t decCLZ(const char* dec)
 {
-	register size_t clz = 0;
+	  size_t clz = 0;
 	ASSERT(decIsValid(dec));
 	while (*dec == '0')
 		++dec, ++clz;
@@ -54,7 +54,7 @@ size_t decCLZ(const char* dec)
 *******************************************************************************
 */
 
-void decFromU32(char* dec, size_t count, register u32 num)
+void decFromU32(char* dec, size_t count,   u32 num)
 {
 	ASSERT(memIsValid(dec, count + 1));
 	dec[count] = '\0';
@@ -64,7 +64,7 @@ void decFromU32(char* dec, size_t count, register u32 num)
 
 u32 decToU32(const char* dec)
 {
-	register u32 num = 0;
+	  u32 num = 0;
 	ASSERT(decIsValid(dec));
 	while (*dec)
 		num *= 10, num += *dec - '0', ++dec;
@@ -73,7 +73,7 @@ u32 decToU32(const char* dec)
 
 #ifdef U64_SUPPORT
 
-void decFromU64(char* dec, size_t count, register u64 num)
+void decFromU64(char* dec, size_t count,   u64 num)
 {
 	ASSERT(memIsValid(dec, count + 1));
 	dec[count] = '\0';
@@ -83,7 +83,7 @@ void decFromU64(char* dec, size_t count, register u64 num)
 
 u64 decToU64(const char* dec)
 {
-	register u64 num = 0;
+	  u64 num = 0;
 	ASSERT(decIsValid(dec));
 	while (*dec)
 		num *= 10, num += *dec - '0', ++dec;
@@ -102,7 +102,7 @@ static const word luhn_table[10] = {0, 2, 4, 6, 8, 1, 3, 5, 7, 9};
 
 char decLuhnCalc(const char* dec)
 {
-	register word cd = 0;
+	  word cd = 0;
 	size_t i;
 	ASSERT(decIsValid(dec));
 	for (i = strLen(dec); i--;) 
@@ -117,7 +117,7 @@ char decLuhnCalc(const char* dec)
 
 bool_t decLuhnVerify(const char* dec)
 {
-	register word cd = 0;
+	  word cd = 0;
 	size_t i;
 	ASSERT(decIsValid(dec));
 	for (i = strLen(dec); i--;) 
@@ -145,7 +145,7 @@ static const char damm_table[10][10] = {
 
 char decDammCalc(const char* dec)
 {
-	register char cd = 0;
+	  char cd = 0;
 	ASSERT(decIsValid(dec));
 	for (; *dec; ++dec)
 		cd = damm_table[(octet)cd][(octet)(*dec - '0')];

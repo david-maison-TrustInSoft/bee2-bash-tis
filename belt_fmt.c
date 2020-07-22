@@ -211,7 +211,7 @@ static void beltStr2Bin(octet bin[], size_t b, u32 mod,
 static void beltBin2StrAdd(u32 mod, u16 str[], size_t count, 
 	octet bin[], size_t b)
 {
-	register u32 t;
+	  u32 t;
 	word* a;
 	size_t m;
 	// особый случай: mod может не уложиться в word
@@ -242,7 +242,7 @@ static void beltBin2StrAdd(u32 mod, u16 str[], size_t count,
 static void beltBin2StrSub(word mod, u16 str[], size_t count, 
 	octet bin[], size_t b)
 {
-	register u32 t;
+	  u32 t;
 	word* a;
 	size_t m;
 	// особый случай: mod может не уложиться в word

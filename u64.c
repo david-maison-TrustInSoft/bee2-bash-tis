@@ -37,7 +37,7 @@ void u64Rev2(u64 buf[], size_t count)
 		buf[count] = u64Rev(buf[count]);
 }
 
-size_t u64Weight(register u64 w)
+size_t u64Weight(  u64 w)
 {
 	w -= ((w >> 1) & 0x5555555555555555);
 	w = (w & 0x3333333333333333) + ((w >> 2) & 0x3333333333333333);
@@ -48,7 +48,7 @@ size_t u64Weight(register u64 w)
 	return (size_t)(w & 0x000000000000007F);
 }
 
-bool_t u64Parity(register u64 w)
+bool_t u64Parity(  u64 w)
 {
 	w ^= w >> 1;
 	w ^= w >> 2;
@@ -59,15 +59,15 @@ bool_t u64Parity(register u64 w)
 	return (bool_t)(w & U64_1);
 }
 
-size_t SAFE(u64CTZ)(register u64 w)
+size_t SAFE(u64CTZ)(  u64 w)
 {
 	return 64 - u64Weight(w | (U64_0 - w));
 }
 
-size_t FAST(u64CTZ)(register u64 w)
+size_t FAST(u64CTZ)(  u64 w)
 {
-	register size_t l = 64;
-	register u64 t;
+	  size_t l = 64;
+	  u64 t;
 	if (t = w << 32)
 		l -= 32, w = t;
 	if (t = w << 16)
@@ -82,7 +82,7 @@ size_t FAST(u64CTZ)(register u64 w)
 	return ((u64)(w << 1)) ? l - 2 : l - (w ? 1 : 0);
 }
 
-size_t SAFE(u64CLZ)(register u64 w)
+size_t SAFE(u64CLZ)(  u64 w)
 {
 	w = w | w >> 1;
 	w = w | w >> 2;
@@ -93,10 +93,10 @@ size_t SAFE(u64CLZ)(register u64 w)
 	return u64Weight(~w);
 }
 
-size_t FAST(u64CLZ)(register u64 w)
+size_t FAST(u64CLZ)(  u64 w)
 {
-	register size_t l = 64;
-	register u64 t;
+	  size_t l = 64;
+	  u64 t;
 	if (t = w >> 32)
 		l -= 32, w = t;
 	if (t = w >> 16)
@@ -111,9 +111,9 @@ size_t FAST(u64CLZ)(register u64 w)
 	return (w >> 1) ? l - 2 : l - (w ? 1 : 0);
 }
 
-u64 u64Shuffle(register u64 w)
+u64 u64Shuffle(  u64 w)
 {
-	register u64 t;
+	  u64 t;
 	t = (w ^ (w >> 16)) & 0x00000000FFFF0000, w ^= t ^ (t << 16);
 	t = (w ^ (w >> 8)) & 0x0000FF000000FF00, w ^= t ^ (t << 8);
 	t = (w ^ (w >> 4)) & 0x00F000F000F000F0, w ^= t ^ (t << 4);
@@ -123,9 +123,9 @@ u64 u64Shuffle(register u64 w)
 	return w;
 }
 
-u64 u64Deshuffle(register u64 w)
+u64 u64Deshuffle(  u64 w)
 {
-	register u64 t;
+	  u64 t;
 	t = (w ^ (w >> 1 )) & 0x2222222222222222, w ^= t ^ (t << 1);
 	t = (w ^ (w >> 2 )) & 0x0C0C0C0C0C0C0C0C, w ^= t ^ (t << 2);
 	t = (w ^ (w >> 4 )) & 0x00F000F000F000F0, w ^= t ^ (t << 4);
@@ -135,9 +135,9 @@ u64 u64Deshuffle(register u64 w)
 	return w;
 }
 
-u64 u64NegInv(register u64 w)
+u64 u64NegInv(  u64 w)
 {
-	register u64 ret = w;
+	  u64 ret = w;
 	ASSERT(w & 1);
 	ret = ret * (w * ret + 2);
 	ret = ret * (w * ret + 2);
@@ -171,7 +171,7 @@ void u64To(void* dest, size_t count, const u64 src[])
 	if (count % 8)
 	{
 		size_t t = count / 8;
-		register u64 u = src[t];
+		  u64 u = src[t];
 		for (t *= 8; t < count; ++t, u >>= 8)
 			((octet*)dest)[t] = (octet)u;
 	}

@@ -101,8 +101,8 @@ void qrPower(word c[], const word a[], const word b[], size_t m,
 {
 	const size_t w = qrCalcSlideWidth(m);
 	const size_t powers_count = SIZE_1 << (w - 1);
-	register word slide;
-	register size_t slide_size;
+	  word slide;
+	  size_t slide_size;
 	size_t pos;
 	// переменные в stack
 	word* power;

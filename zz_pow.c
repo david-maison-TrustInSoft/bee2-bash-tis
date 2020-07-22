@@ -71,13 +71,13 @@ size_t zzPowerMod_deep(size_t n, size_t m)
 *******************************************************************************
 */
 
-word zzPowerModW(register word a, register word b, register word mod, 
+word zzPowerModW(  word a,   word b,   word mod, 
 	void* stack)
 {
-	register dword prod;
-	register word slide;
-	register size_t pos;
-	register size_t slide_size;
+	  dword prod;
+	  word slide;
+	  size_t pos;
+	  size_t slide_size;
 	// переменные в stack
 	word* powers;	/* [4]powers */
 	// pre

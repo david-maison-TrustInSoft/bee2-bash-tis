@@ -445,8 +445,8 @@ size_t priIsSieved_deep(size_t base_count)
 
 bool_t priIsSmooth(const word a[], size_t n, size_t base_count, void* stack)
 {
-	register size_t i;
-	register word mod;
+	  size_t i;
+	  word mod;
 	// переменные в stack
 	word* t = (word*)stack;
 	stack = t + n;
@@ -514,15 +514,15 @@ const word _bases32[] = {2, 7, 61};
 const word _bases64[] = {2, 325, 9375, 28178, 450775, 9780504, 1795265022};
 #endif
 
-bool_t priIsPrimeW(register word a, void* stack)
+bool_t priIsPrimeW(  word a, void* stack)
 {
 	const word* bases;
-	register word r;
-	register size_t s;
-	register size_t iter;
-	register size_t i;
-	register word base;
-	register dword prod;
+	  word r;
+	  size_t s;
+	  size_t iter;
+	  size_t i;
+	  word base;
+	  dword prod;
 	// маленькое или четное?
 	if (a <= 3 || a % 2 == 0)
 		return a == 2 || a == 3;
@@ -597,9 +597,9 @@ B_PER_IMPOSSLIBLE / log_2(24) < B_PER_IMPOSSLIBLE / 4.5.
 
 bool_t priRMTest(const word a[], size_t n, size_t iter, void* stack)
 {
-	register size_t s;
-	register size_t m;
-	register size_t i;
+	  size_t s;
+	  size_t m;
+	  size_t i;
 	// переменные в stack
 	word* r = (word*)stack;
 	word* base = r + n;
@@ -743,9 +743,9 @@ size_t priIsSGPrime_deep(size_t n)
 *******************************************************************************
 */
 
-bool_t priNextPrimeW(word p[1], register word a, void* stack)
+bool_t priNextPrimeW(word p[1],   word a, void* stack)
 {
-	register size_t l;
+	  size_t l;
 	// p <- a, l <- битовая длина a
 	p[0] = a, l = wwBitSize(p, 1);
 	// 0-битовых и 1-битовых простых не существует

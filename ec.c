@@ -173,9 +173,9 @@ bool_t ecMulA(word b[], const word a[], const ec_o* ec, const word d[],
 	const size_t naf_width = ecNAFWidth(B_OF_W(m));
 	const size_t naf_count = SIZE_1 << (naf_width - 2);
 	const word naf_hi = WORD_1 << (naf_width - 1);
-	register size_t naf_size;
-	register size_t i;
-	register word w;
+	  size_t naf_size;
+	  size_t i;
+	  word w;
 	// переменные в stack
 	word* naf;			/* NAF */
 	word* t;			/* вспомогательная точка */
@@ -286,7 +286,7 @@ Elliptic Curve Cryptography, Springer, 2004] (interleaving with NAF).
 bool_t ecAddMulA(word b[], const ec_o* ec, void* stack, size_t k, ...)
 {
 	const size_t n = ec->f->n;
-	register word w;
+	  word w;
 	size_t i, naf_max_size = 0;
 	va_list marker;
 	// переменные в stack

@@ -805,7 +805,7 @@ size_t ecpTplJA3_deep(size_t n, size_t f_deep)
 bool_t ecpCreateJ(ec_o* ec, const qr_o* f, const octet A[], const octet B[], 
 	void* stack)
 {
-	register bool_t bA3;
+	  bool_t bA3;
 	word* t;
 	// pre
 	ASSERT(memIsValid(ec, sizeof(ec_o)));
@@ -1204,7 +1204,7 @@ size_t ecpSubAA_deep(size_t n, size_t f_deep)
 void ecpSWU(word b[], const word a[], const ec_o* ec, void* stack)
 {
 	const size_t n = ec->f->n;
-	register size_t mask;
+	  size_t mask;
 	// переменные в stack [x2 после x1, s после y!]
 	word* t = (word*)stack;
 	word* x1 = t + n;

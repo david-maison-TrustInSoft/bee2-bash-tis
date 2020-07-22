@@ -27,21 +27,21 @@ version 3. See Copyright Notices in bee2/info.h.
 
 static void brngBlockNeg(octet dest[32], const octet src[32])
 {
-	register size_t i = W_OF_O(32);
+	  size_t i = W_OF_O(32);
 	while (i--)
 		((word*)dest)[i] = ~((const word*)src)[i];
 }
 
 static void brngBlockXor2(octet dest[32], const octet src[32])
 {
-	register size_t i = W_OF_O(32);
+	  size_t i = W_OF_O(32);
 	while (i--)
 		((word*)dest)[i] ^= ((const word*)src)[i];
 }
 
 static void brngBlockInc(octet block[32])
 {
-	register size_t i = 0;
+	  size_t i = 0;
 	word* w = (word*)block;
 	do
 	{

@@ -80,7 +80,7 @@ tm_ticks_t tmFreq()
 
 tm_ticks_t tmTicks()
 {
-	register tm_ticks_t x;
+	  tm_ticks_t x;
 	__asm__ volatile (".byte 0x0f, 0x31" : "=A" (x));
 	return x;
 }
@@ -89,8 +89,8 @@ tm_ticks_t tmTicks()
 
 tm_ticks_t tmTicks()
 {
-	register u32 hi;
-	register u32 lo;
+	  u32 hi;
+	  u32 lo;
 	__asm__ __volatile__ ("rdtsc" : "=a"(lo), "=d"(hi));
 	return (tm_ticks_t)lo | (tm_ticks_t)hi << 32;
 }
@@ -189,7 +189,7 @@ tm_time_t tmTime()
 
 tm_time_t tmTimeRound(tm_time_t t0, tm_time_t ts)
 {
-	register tm_time_t t = tmTime();
+	  tm_time_t t = tmTime();
 	if (ts == 0 || t < t0)
 		return TIME_ERR;
 	t = (t - t0) / ts;

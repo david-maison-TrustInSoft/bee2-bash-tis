@@ -27,10 +27,10 @@ version 3. See Copyright Notices in bee2/info.h.
 *******************************************************************************
 */
 
-word zzMulW(word b[], const word a[], size_t n, register word w)
+word zzMulW(word b[], const word a[], size_t n,   word w)
 {
-	register word carry = 0;
-	register dword prod;
+	  word carry = 0;
+	  dword prod;
 	size_t i;
 	ASSERT(wwIsSameOrDisjoint(a, b, n));
 	for (i = 0; i < n; ++i)
@@ -44,10 +44,10 @@ word zzMulW(word b[], const word a[], size_t n, register word w)
 	return carry;
 }
 
-word zzAddMulW(word b[], const word a[], size_t n, register word w)
+word zzAddMulW(word b[], const word a[], size_t n,   word w)
 {
-	register word carry = 0;
-	register dword prod;
+	  word carry = 0;
+	  dword prod;
 	size_t i;
 	ASSERT(wwIsSameOrDisjoint(a, b, n));
 	for (i = 0; i < n; ++i)
@@ -62,10 +62,10 @@ word zzAddMulW(word b[], const word a[], size_t n, register word w)
 	return carry;
 }
 
-word zzSubMulW(word b[], const word a[], size_t n, register word w)
+word zzSubMulW(word b[], const word a[], size_t n,   word w)
 {
-	register word borrow = 0;
-	register dword prod;
+	  word borrow = 0;
+	  dword prod;
 	size_t i;
 	ASSERT(wwIsSameOrDisjoint(a, b, n));
 	for (i = 0; i < n; ++i)
@@ -84,8 +84,8 @@ word zzSubMulW(word b[], const word a[], size_t n, register word w)
 void zzMul(word c[], const word a[], size_t n, const word b[], size_t m, 
 	void* stack)
 {
-	register word carry = 0;
-	register dword prod;
+	  word carry = 0;
+	  dword prod;
 	size_t i, j;
 	ASSERT(wwIsDisjoint2(a, n, c, n + m));
 	ASSERT(wwIsDisjoint2(b, m, c, n + m));
@@ -113,9 +113,9 @@ size_t zzMul_deep(size_t n, size_t m)
 
 void zzSqr(word b[], const word a[], size_t n, void* stack)
 {
-	register word carry = 0;
-	register word carry1;
-	register dword prod;
+	  word carry = 0;
+	  word carry1;
+	  dword prod;
 	size_t i, j;
 	ASSERT(wwIsDisjoint2(a, n, b, n + n));
 	// b <- \sum_{i < j} a_i a_j B^{i + j}
@@ -186,10 +186,10 @@ size_t zzSqr_deep(size_t n)
 *******************************************************************************
 */
 
-word zzDivW(word q[], const word a[], size_t n, register word w)
+word zzDivW(word q[], const word a[], size_t n,   word w)
 {
-	register word r = 0;
-	register dword divisor;
+	  word r = 0;
+	  dword divisor;
 	ASSERT(w > 0);
 	ASSERT(wwIsSameOrDisjoint(a, q, n));
 	while (n--)
@@ -204,10 +204,10 @@ word zzDivW(word q[], const word a[], size_t n, register word w)
 	return r;
 }
 
-word zzModW(const word a[], size_t n, register word w)
+word zzModW(const word a[], size_t n,   word w)
 {
-	register word r = 0;
-	register dword divisor;
+	  word r = 0;
+	  dword divisor;
 	ASSERT(w > 0);
 	ASSERT(wwIsValid(a, n));
 	while (n--)
@@ -221,11 +221,11 @@ word zzModW(const word a[], size_t n, register word w)
 	return r;
 }
 
-word zzModW2(const word a[], size_t n, register word w)
+word zzModW2(const word a[], size_t n,   word w)
 {
-	register word r0 = 0;
-	register dword r1 = 0;
-	register word b;
+	  word r0 = 0;
+	  dword r1 = 0;
+	  word b;
 	// pre
 	ASSERT(w > 0);
 	ASSERT(w <= WORD_BIT_HALF);
@@ -321,9 +321,9 @@ Vanstone S. Handbook of Applied Cryptography]:
 void zzDiv(word q[], word r[], const word a[], size_t n, const word b[],
 	size_t m, void* stack)
 {
-	register dword dividentHi;
-	register word borrow;
-	register size_t shift;
+	  dword dividentHi;
+	  word borrow;
+	  size_t shift;
 	size_t i;
 	// переменные в stack
 	word* divident;		/*< нормализованное делимое (n + 1 слово) */
@@ -411,9 +411,9 @@ size_t zzDiv_deep(size_t n, size_t m)
 
 void zzMod(word r[], const word a[], size_t n, const word b[], size_t m, void* stack)
 {
-	register dword dividentHi;
-	register word temp;
-	register size_t shift;
+	  dword dividentHi;
+	  word temp;
+	  size_t shift;
 	size_t i;
 	// переменные в stack
 	word* divident;		/*< нормализованное делимое (n + 1 слово) */

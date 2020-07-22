@@ -45,9 +45,9 @@ void FAST(zzAddMod)(word c[], const word a[], const word b[], const word mod[],
 void SAFE(zzAddMod)(word c[], const word a[], const word b[], const word mod[],
 	size_t n)
 {
-	register word carry = 0;
-	register word mask = 1;
-	register word w;
+	  word carry = 0;
+	  word mask = 1;
+	  word w;
 	size_t i;
 	// pre
 	ASSERT(wwIsSameOrDisjoint(a, c, n));
@@ -72,7 +72,7 @@ void SAFE(zzAddMod)(word c[], const word a[], const word b[], const word mod[],
 	w = mask = carry = 0;
 }
 
-void FAST(zzAddWMod)(word b[], const word a[], register word w, 
+void FAST(zzAddWMod)(word b[], const word a[],   word w, 
 	const word mod[], size_t n)
 {
 	ASSERT(wwIsSameOrDisjoint(a, b, n));
@@ -84,10 +84,10 @@ void FAST(zzAddWMod)(word b[], const word a[], register word w,
 	w = 0;
 }
 
-void SAFE(zzAddWMod)(word b[], const word a[], register word w, 
+void SAFE(zzAddWMod)(word b[], const word a[],   word w, 
 	const word mod[], size_t n)
 {
-	register word mask = 1;
+	  word mask = 1;
 	size_t i;
 	ASSERT(wwIsSameOrDisjoint(a, b, n));
 	ASSERT(wwIsDisjoint(b, mod, n));
@@ -123,7 +123,7 @@ void FAST(zzSubMod)(word c[], const word a[], const word b[], const word mod[],
 void SAFE(zzSubMod)(word c[], const word a[], const word b[], const word mod[],
 	size_t n)
 {
-	register word mask = 0;
+	  word mask = 0;
 	ASSERT(wwIsSameOrDisjoint(a, c, n));
 	ASSERT(wwIsSameOrDisjoint(b, c, n));
 	ASSERT(wwIsDisjoint(c, mod, n));
@@ -134,7 +134,7 @@ void SAFE(zzSubMod)(word c[], const word a[], const word b[], const word mod[],
 	mask = 0;
 }
 
-void FAST(zzSubWMod)(word b[], const word a[], register word w, 
+void FAST(zzSubWMod)(word b[], const word a[],   word w, 
 	const word mod[], size_t n)
 {
 	ASSERT(wwIsSameOrDisjoint(a, b, n));
@@ -146,10 +146,10 @@ void FAST(zzSubWMod)(word b[], const word a[], register word w,
 	w = 0;
 }
 
-void SAFE(zzSubWMod)(word b[], const word a[], register word w, 
+void SAFE(zzSubWMod)(word b[], const word a[],   word w, 
 	 const word mod[], size_t n)
 {
-	register word mask;
+	  word mask;
 	ASSERT(wwIsSameOrDisjoint(a, b, n));
 	ASSERT(wwIsDisjoint(b, mod, n));
 	ASSERT(wwCmp(a, mod, n) < 0 && wwCmpW(mod, n, w) > 0);
@@ -173,7 +173,7 @@ void FAST(zzNegMod)(word b[], const word a[], const word mod[], size_t n)
 
 void SAFE(zzNegMod)(word b[], const word a[], const word mod[], size_t n)
 {
-	register word mask;
+	  word mask;
 	ASSERT(wwIsSameOrDisjoint(a, b, n));
 	ASSERT(wwIsDisjoint(b, mod, n));
 	ASSERT(wwCmp(a, mod, n) < 0);
@@ -251,8 +251,8 @@ size_t zzInvMod_deep(size_t n)
 
 void FAST(zzDoubleMod)(word b[], const word a[], const word mod[], size_t n)
 {
-	register word carry = 0;
-	register word hi;
+	  word carry = 0;
+	  word hi;
 	size_t i;
 	// pre
 	ASSERT(wwCmp(a, mod, n) < 0);
@@ -272,9 +272,9 @@ void FAST(zzDoubleMod)(word b[], const word a[], const word mod[], size_t n)
 
 void SAFE(zzDoubleMod)(word b[], const word a[], const word mod[], size_t n)
 {
-	register word carry = 0;
-	register word hi;
-	register word mask = 1;
+	  word carry = 0;
+	  word hi;
+	  word mask = 1;
 	size_t i;
 	// pre
 	ASSERT(wwCmp(a, mod, n) < 0);
@@ -300,8 +300,8 @@ void SAFE(zzDoubleMod)(word b[], const word a[], const word mod[], size_t n)
 
 void FAST(zzHalfMod)(word b[], const word a[], const word mod[], size_t n)
 {
-	register word carry = 0;
-	register word lo;
+	  word carry = 0;
+	  word lo;
 	// pre
 	ASSERT(wwIsSameOrDisjoint(a, b, n));
 	ASSERT(wwIsDisjoint(mod, b, n));
@@ -328,9 +328,9 @@ void FAST(zzHalfMod)(word b[], const word a[], const word mod[], size_t n)
 
 void SAFE(zzHalfMod)(word b[], const word a[], const word mod[], size_t n)
 {
-	register word carry = 0;
-	register word mask = 0;
-	register word w;
+	  word carry = 0;
+	  word mask = 0;
+	  word w;
 	size_t i;
 	// pre
 	ASSERT(wwIsSameOrDisjoint(a, b, n));
@@ -363,8 +363,8 @@ void SAFE(zzHalfMod)(word b[], const word a[], const word mod[], size_t n)
 bool_t zzRandMod(word a[], const word mod[], size_t n, gen_i rng, 
 	void* rng_state)
 {
-	register size_t l;
-	register size_t i;
+	  size_t l;
+	  size_t i;
 	// pre
 	ASSERT(wwIsDisjoint(a, mod, n));
 	ASSERT(n > 0 && mod[n - 1] != 0);
@@ -386,8 +386,8 @@ bool_t zzRandMod(word a[], const word mod[], size_t n, gen_i rng,
 bool_t zzRandNZMod(word a[], const word mod[], size_t n, gen_i rng, 
 	void* rng_state)
 {
-	register size_t l;
-	register size_t i;
+	  size_t l;
+	  size_t i;
 	// pre
 	ASSERT(wwIsDisjoint(a, mod, n));
 	ASSERT(n > 0 && mod[n - 1] != 0 && wwCmpW(mod, n, 1) > 0);

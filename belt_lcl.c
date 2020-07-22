@@ -28,14 +28,14 @@ version 3. See Copyright Notices in bee2/info.h.
 void beltBlockAddBitSizeU32(u32 block[4], size_t count)
 {
 	// block <- block + 8 * count
-	register u32 carry = (u32)count << 3;
+	  u32 carry = (u32)count << 3;
 #if (B_PER_S < 32)
 	carry = (block[0] += carry) < carry;
 	carry = (block[1] += carry) < carry;
 	carry = (block[2] += carry) < carry;
 	block[3] += carry;
 #else
-	register size_t t = count >> 29;
+	  size_t t = count >> 29;
 	carry = (block[0] += carry) < carry;
 	if ((block[1] += carry) < carry)
 		block[1] = (u32)t;
@@ -57,9 +57,9 @@ void beltBlockAddBitSizeU32(u32 block[4], size_t count)
 void beltHalfBlockAddBitSizeW(word block[W_OF_B(64)], size_t count)
 {
 	// block <- block + 8 * count
-	register word carry = (word)count << 3;
+	  word carry = (word)count << 3;
 #if (B_PER_W == 16)
-	register size_t t = count >> 13;
+	  size_t t = count >> 13;
 	carry = (block[0] += carry) < carry;
 	if ((block[1] += carry) < carry)
 		block[1] = (word)t;
@@ -74,7 +74,7 @@ void beltHalfBlockAddBitSizeW(word block[W_OF_B(64)], size_t count)
 	block[3] += carry;
 	block[3] += (word)t;
 #elif (B_PER_W == 32)
-	register size_t t = count;
+	  size_t t = count;
 	carry = (block[0] += carry) < carry;
 	t >>= 15, t >>= 14;
 	block[1] += carry;
@@ -122,7 +122,7 @@ size_t beltPolyMul_deep()
 
 void beltBlockMulC(u32 block[4])
 {
-	register u32 t = ~((block[3] >> 31) - U32_1) & 0x00000087;
+	  u32 t = ~((block[3] >> 31) - U32_1) & 0x00000087;
 	block[3] = (block[3] << 1) ^ (block[2] >> 31);
 	block[2] = (block[2] << 1) ^ (block[1] >> 31);
 	block[1] = (block[1] << 1) ^ (block[0] >> 31);

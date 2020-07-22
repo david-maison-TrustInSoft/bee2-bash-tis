@@ -35,7 +35,7 @@ void u16Rev2(u16 buf[], size_t count)
 		buf[count] = u16Rev(buf[count]);
 }
 
-size_t u16Weight(register u16 w)
+size_t u16Weight(  u16 w)
 {
 	w -= ((w >> 1) & 0x5555);
 	w = (w & 0x3333) + ((w >> 2) & 0x3333);
@@ -44,7 +44,7 @@ size_t u16Weight(register u16 w)
 	return (size_t)(w & 0x001F);
 }
 
-bool_t u16Parity(register u16 w)
+bool_t u16Parity(  u16 w)
 {
 	w ^= w >> 1;
 	w ^= w >> 2;
@@ -53,15 +53,15 @@ bool_t u16Parity(register u16 w)
 	return (bool_t)(w & U16_1);
 }
 
-size_t SAFE(u16CTZ)(register u16 w)
+size_t SAFE(u16CTZ)(  u16 w)
 {
 	return 16 - u16Weight(w | (U16_0 - w));
 }
 
-size_t FAST(u16CTZ)(register u16 w)
+size_t FAST(u16CTZ)(  u16 w)
 {
-	register size_t l = 16;
-	register u16 t;
+	  size_t l = 16;
+	  u16 t;
 	if (t = w << 8)
 		l -= 8, w = t;
 	if (t = w << 4)
@@ -72,7 +72,7 @@ size_t FAST(u16CTZ)(register u16 w)
 	return ((u16)(w << 1)) ? l - 2 : l - (w ? 1 : 0);
 }
 
-size_t SAFE(u16CLZ)(register u16 w)
+size_t SAFE(u16CLZ)(  u16 w)
 {
 	w = w | w >> 1;
 	w = w | w >> 2;
@@ -81,10 +81,10 @@ size_t SAFE(u16CLZ)(register u16 w)
 	return u16Weight(~w);
 }
 
-size_t FAST(u16CLZ)(register u16 w)
+size_t FAST(u16CLZ)(  u16 w)
 {
-	register size_t l = 16;
-	register u16 t;
+	  size_t l = 16;
+	  u16 t;
 	if (t = w >> 8)
 		l -= 8, w = t;
 	if (t = w >> 4)
@@ -95,9 +95,9 @@ size_t FAST(u16CLZ)(register u16 w)
 	return (w >> 1) ? l - 2 : l - (w ? 1 : 0);
 }
 
-u16 u16Shuffle(register u16 w)
+u16 u16Shuffle(  u16 w)
 {
-	register u16 t;
+	  u16 t;
 	t = (w ^ (w >> 4)) & 0x00F0, w ^= t ^ (t << 4);
 	t = (w ^ (w >> 2)) & 0x0C0C, w ^= t ^ (t << 2);
 	t = (w ^ (w >> 1)) & 0x2222, w ^= t ^ (t << 1);
@@ -105,9 +105,9 @@ u16 u16Shuffle(register u16 w)
 	return w;
 }
 
-u16 u16Deshuffle(register u16 w)
+u16 u16Deshuffle(  u16 w)
 {
-	register u16 t;
+	  u16 t;
 	t = (w ^ (w >> 1)) & 0x2222, w ^= t ^ (t << 1);
 	t = (w ^ (w >> 2)) & 0x0C0C, w ^= t ^ (t << 2);
 	t = (w ^ (w >> 4)) & 0x00F0, w ^= t ^ (t << 4);
@@ -115,9 +115,9 @@ u16 u16Deshuffle(register u16 w)
 	return w;
 }
 
-u16 u16NegInv(register u16 w)
+u16 u16NegInv(  u16 w)
 {
-	register u16 ret = w;
+	  u16 ret = w;
 	ASSERT(w & 1);
 	ret = ret * (w * ret + 2);
 	ret = ret * (w * ret + 2);
@@ -148,7 +148,7 @@ void u16To(void* dest, size_t count, const u16 src[])
 #if (OCTET_ORDER == BIG_ENDIAN)
 	if (count % 2)
 	{
-		register u16 u = src[--count / 2];
+		  u16 u = src[--count / 2];
 		((octet*)dest)[count] = (octet)u;
 		u = 0;
 	}

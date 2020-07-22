@@ -748,7 +748,7 @@ err_t dstuRecoverPoint(octet point[], const dstu_params* params,
 	const octet xpoint[])
 {
 	err_t code;
-	register bool_t trace;
+	  bool_t trace;
 	// состояние
 	ec_o* ec;
 	word* x;

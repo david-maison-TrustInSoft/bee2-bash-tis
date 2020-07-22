@@ -52,8 +52,8 @@ size_t zzRed_deep(size_t n)
 
 void FAST(zzRedCrand)(word a[], const word mod[], size_t n, void* stack)
 {
-	register word carry;
-	register dword prod;
+	  word carry;
+	  dword prod;
 	// pre
 	ASSERT(wwIsDisjoint2(a, 2 * n, mod, n));
 	ASSERT(n >= 2 && mod[0] && wwIsRepW(mod + 1, n - 1, WORD_MAX));
@@ -74,9 +74,9 @@ void FAST(zzRedCrand)(word a[], const word mod[], size_t n, void* stack)
 
 void SAFE(zzRedCrand)(word a[], const word mod[], size_t n, void* stack)
 {
-	register word carry;
-	register dword prod;
-	register word mask;
+	  word carry;
+	  dword prod;
+	  word mask;
 	size_t i;
 	// pre
 	ASSERT(wwIsDisjoint2(a, 2 * n, mod, n));
@@ -173,7 +173,7 @@ void FAST(zzRedBarr)(word a[], const word mod[], size_t n,
 void SAFE(zzRedBarr)(word a[], const word mod[], size_t n, 
 	const word barr_param[], void* stack)
 {
-	register word w;
+	  word w;
 	size_t i;
 	// переменные в stack
 	word* q = (word*)stack;
@@ -235,10 +235,10 @@ DSP56000. Advances in Cryptology -- EUROCRYPT 90, LNCS 473, 230–244. 1990]:
 */
 
 void FAST(zzRedMont)(word a[], const word mod[], size_t n, 
-	register word mont_param, void* stack)
+	  word mont_param, void* stack)
 {
-	register word carry = 0;
-	register word w;
+	  word carry = 0;
+	  word w;
 	size_t i;
 	// pre
 	ASSERT(wwIsDisjoint2(a, 2 * n, mod, n));
@@ -263,10 +263,10 @@ void FAST(zzRedMont)(word a[], const word mod[], size_t n,
 }
 
 void SAFE(zzRedMont)(word a[], const word mod[], size_t n, 
-	register word mont_param, void* stack)
+	  word mont_param, void* stack)
 {
-	register word carry = 0;
-	register word w = 0;
+	  word carry = 0;
+	  word w = 0;
 	size_t i;
 	// pre
 	ASSERT(wwIsDisjoint2(a, 2 * n, mod, n));
@@ -318,12 +318,12 @@ size_t zzRedMont_deep(size_t n)
 */
 
 void FAST(zzRedCrandMont)(word a[], const word mod[], size_t n, 
-	register word mont_param, void* stack)
+	  word mont_param, void* stack)
 {
-	register word carry = 0;
-	register word borrow = 0;
-	register dword prod;
-	register word w;
+	  word carry = 0;
+	  word borrow = 0;
+	  dword prod;
+	  word w;
 	size_t i;
 	// pre
 	ASSERT(wwIsDisjoint2(a, 2 * n, mod, n));
@@ -357,12 +357,12 @@ void FAST(zzRedCrandMont)(word a[], const word mod[], size_t n,
 }
 
 void SAFE(zzRedCrandMont)(word a[], const word mod[], size_t n, 
-	register word mont_param, void* stack)
+	  word mont_param, void* stack)
 {
-	register word carry = 0;
-	register word borrow = 0;
-	register word w = 0;
-	register dword prod;
+	  word carry = 0;
+	  word borrow = 0;
+	  word w = 0;
+	  dword prod;
 	size_t i;
 	// pre
 	ASSERT(wwIsDisjoint2(a, 2 * n, mod, n));
