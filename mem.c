@@ -48,11 +48,11 @@ bool_t memIsAligned(const void* buf, size_t size)
 *******************************************************************************
 Стандартные функции
 
-\remark Перед вызовом memcpy(), memmove(), memset() проверяется, 
+\remark Перед вызовом memcpy(), memmove(), memset() проверяется,
 что count != 0: при count == 0 поведение стандартных функций непредсказуемо
 (см. https://www.imperialviolet.org/2016/06/26/nonnull.html).
 
-\remark Прямое обращение к функции ядра HeapAlloc() решает проблему 
+\remark Прямое обращение к функции ядра HeapAlloc() решает проблему
 с освобождением памяти в плагине bee2evp, связывающем bee2 с OpenSSL (1.1.0).
 *******************************************************************************
 */
@@ -94,7 +94,7 @@ void memNeg(void* buf, size_t count)
 	}
 }
 
-void* memAlloc(size_t count)
+int* memAlloc(size_t count)
 {
 #ifdef OS_WIN
 	return HeapAlloc(GetProcessHeap(), 0, count);

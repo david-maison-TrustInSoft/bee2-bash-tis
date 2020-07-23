@@ -6,7 +6,7 @@
 \author (C) Sergey Agievich [agievich@{bsu.by|gmail.com}]
 \created 2012.07.16
 \version 2019.07.09
-\license This program is released under the GNU General Public License 
+\license This program is released under the GNU General Public License
 version 3. See Copyright Notices in bee2/info.h.
 *******************************************************************************
 */
@@ -68,7 +68,7 @@ extern "C" {
 	Октеты буфера [count]src переписываются в буфер [count]dest.
 	\pre Буферы src и dest не пересекаются.
 */
-void memCopy( 
+void memCopy(
 	void* dest,			/*< [out] буфер-назначение */
 	const void* src,	/*< [in] буфер-источник */
 	size_t count		/*< [in] число октетов */
@@ -79,7 +79,7 @@ void memCopy(
 	Октеты буфера [count]src перемещаются в буфер [count]dest.
 	\pre Буферы src и dest могут пересекаться.
 */
-void memMove( 
+void memMove(
 	void* dest,			/*< [out] буфер-назначение */
 	const void* src,	/*< [in] буфер-источник */
 	size_t count		/*< [in] число октетов */
@@ -89,7 +89,7 @@ void memMove(
 
 	Буфер [count]buf заполняется октетом c.
 */
-void memSet( 
+void memSet(
 	void* buf,			/*< [out] буфер */
 	octet c,			/*< [in] октет-значение */
 	size_t count		/*< [in] число октетов */
@@ -102,7 +102,7 @@ void memSet(
 
 	Все биты буфера [count]buf инвертируются.
 */
-void memNeg( 
+void memNeg(
 	void* buf,			/*< [in/out] буфер */
 	size_t count		/*< [in] число октетов */
 );
@@ -112,15 +112,15 @@ void memNeg(
 	\return Указатель на блок памяти или 0, если памяти не хватает.
 	\remark Блок выделяется, даже если count == 0.
 */
-void* memAlloc(
+int* memAlloc(
 	size_t count		/*!< [in] размер блока */
 );
 
 /*!	\brief Изменение размера блока памяти
-	Размер блока динамической памяти buf устанавливается равным count. 
-	При необходимости блок перемещается в памяти. Содержимое блока 
-	максимально сохраняется. 
-	\return Указатель на блок памяти с новым размером 
+	Размер блока динамической памяти buf устанавливается равным count.
+	При необходимости блок перемещается в памяти. Содержимое блока
+	максимально сохраняется.
+	\return Указатель на блок памяти с новым размером
 	или 0, если count == 0 или памяти не хватает.
 	\remark memRealloc(buf, 0) равносильно memFree(buf).
 */
@@ -156,7 +156,7 @@ bool_t memIsValid(
 );
 
 /*!	\def memIsNullOrValid
-	\brief Нулевой указатель или корректный буфер памяти? 
+	\brief Нулевой указатель или корректный буфер памяти?
 */
 #define memIsNullOrValid(buf, count)\
 	((buf) == 0 || memIsValid(buf, count))
@@ -174,7 +174,7 @@ bool_t memIsAligned(
 
 /*!	\brief Проверка совпадения
 
-	Проверяется, что содержимое буферов [count]buf1 и [count]buf2 совпадает. 
+	Проверяется, что содержимое буферов [count]buf1 и [count]buf2 совпадает.
 	\return Признак совпадения.
 	\safe Имеется ускоренная нерегулярная редакция.
 */
@@ -190,12 +190,12 @@ bool_t FAST(memEq)(const void* buf1, const void* buf2, size_t count);
 /*!	\brief Сравнение
 
 	Буферы [count]buf1 и [count]buf2 сравниваются обратно-лексикографически.
-	\return < 0, если [count]buf1 < [count]buf2, 
-	0, если [count]buf1 == [count]buf2, 
+	\return < 0, если [count]buf1 < [count]buf2,
+	0, если [count]buf1 == [count]buf2,
 	> 0, если [count]buf1 > [count]buf2.
-	\remark Октеты буферов сравниваются последовательно, от последнего 
+	\remark Октеты буферов сравниваются последовательно, от последнего
 	к первому. Первое несовпадение задает соотношение между буферами.
-	\warning Стандартная функция memcmp() сравнивает октеты от первого 
+	\warning Стандартная функция memcmp() сравнивает октеты от первого
 	к последнему.
 	\safe Имеется ускоренная нерегулярная редакция.
 */
@@ -291,7 +291,7 @@ bool_t memIsDisjoint(
 
 /*!	\brief Буферы совпадают или не пересекаются?
 
-	Проверяется, что буфер [count]buf1 совпадает или не пересекается с буфером 
+	Проверяется, что буфер [count]buf1 совпадает или не пересекается с буфером
 	[count]buf2.
 	\return Проверяемый признак.
 	\pre Буферы buf1 и buf2 корректны.
@@ -317,7 +317,7 @@ bool_t memIsDisjoint2(
 
 /*!	\brief Три буфера не пересекаются?
 
-	Проверяется, что буферы [count1]buf1, [count2]buf2 и [count3]buf3 
+	Проверяется, что буферы [count1]buf1, [count2]buf2 и [count3]buf3
 	попарно не пересекаются.
 	\return Проверяемый признак.
 	\pre Буферы buf1, buf2 и buf3 корректны.
@@ -333,7 +333,7 @@ bool_t memIsDisjoint3(
 
 /*!	\brief Четыре буфера не пересекаются?
 
-	Проверяется, что буферы [count1]buf1, [count2]buf2, [count3]buf3 
+	Проверяется, что буферы [count1]buf1, [count2]buf2, [count3]buf3
 	и [count4]buf4 попарно не пересекаются.
 	\return Проверяемый признак.
 	\pre Буферы buf1, buf2, buf3 и buf4 корректны.
@@ -365,7 +365,7 @@ void memXor(
 
 /*!	\brief Добавление октетов памяти по модулю 2
 
-	К октетам буфера [count]dest добавляются октеты буфера [count]src. 
+	К октетам буфера [count]dest добавляются октеты буфера [count]src.
 	Сложение выполняется поразрядно по модулю 2.
 	\pre Буфер dest либо не пересекается, либо совпадает с буфером src.
 */
@@ -377,7 +377,7 @@ void memXor2(
 
 /*!	\brief Перестановка октетов памяти
 
-	Октеты буферов [count]buf1 и [count]buf2 меняются местами. 
+	Октеты буферов [count]buf1 и [count]buf2 меняются местами.
 	\pre Буферы buf1 и buf2 не пересекаются.
 */
 void memSwap(
