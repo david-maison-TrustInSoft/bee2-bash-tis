@@ -16,14 +16,18 @@ version 3. See Copyright Notices in bee2/info.h.
 #include "bee2/core/util.h"
 #include "bee2/core/word.h"
 
+#include <stdlib.h>
+
+/*
 #ifndef OS_APPLE
 	#include <malloc.h>
 #else
-	#include <stdlib.h>
+с	#include <stdlib.h>
 #endif
 #ifdef OS_WIN
 	#include <windows.h>
 #endif
+*/
 
 /*
 *******************************************************************************
