@@ -19,7 +19,7 @@
 (setq
    *M
    (quote
-      sparc_64 sparc_32
+      gcc_sparc_64 gcc_sparc_32
       # sparc_64 sparc_32
       # x86_32 x86_64
       # x86_16 x86_16_huge
