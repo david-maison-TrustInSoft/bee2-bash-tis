@@ -6,7 +6,7 @@
 \author (C) Sergey Agievich [agievich@{bsu.by|gmail.com}]
 \created 2014.10.13
 \version 2019.07.10
-\license This program is released under the GNU General Public License 
+\license This program is released under the GNU General Public License
 version 3. See Copyright Notices in bee2/info.h.
 *******************************************************************************
 */
@@ -107,20 +107,25 @@ rngSeedTRNG_break:
 
 #elif defined(__GNUC__) && (defined(__i386__) || defined(__x86_64__))
 
-#include <cpuid.h>
+// XXX
+//#include <cpuid.h>
 
+// XXX
 static bool_t rngHasTRNG()
 {
+/*
 	u32 info[4];
+
 	// Intel?
 	__cpuid(0, info[0], info[1], info[2], info[3]);
 	if (!memEq(info + 1, "Genu", 4) ||
 		!memEq(info + 3, "ineI", 4) ||
 		!memEq(info + 2, "ntel", 4))
 		return FALSE;
-	/* rdrand? */
 	__cpuid(1, info[0], info[1], info[2], info[3]);
 	 return (info[2] & 0x40000000) == 0x40000000;
+*/
+    return (0 == 1);
 }
 
 static err_t rngReadTRNG(size_t* read, void* buf, size_t count)
@@ -182,14 +187,14 @@ static err_t rngReadTRNG(size_t* read, void* buf, size_t count)
 Реализация:
 -	таймер может быть источником случайности, если он обновляется не реже
 	10^9 раз в секунду (1GHz);
--	для формирования одного выходного бита используется сумма битов четности 
-	2-x (Linux) или 8-ми (в остальных случаях) разностей между показаниями 
+-	для формирования одного выходного бита используется сумма битов четности
+	2-x (Linux) или 8-ми (в остальных случаях) разностей между показаниями
 	таймера.
 
-\warning Качество источника зависит от организации ядра. Эксперименты 
-показывают, что в Linux качество выше, чем в Windows. Указанные выше числа 
+\warning Качество источника зависит от организации ядра. Эксперименты
+показывают, что в Linux качество выше, чем в Windows. Указанные выше числа
 2 и 8 выбраны экспериментальным путем (проверялось соответствие выходных
-последовательностей тестам FIPS). 
+последовательностей тестам FIPS).
 
 \warning [Jessie Walker]: наблюдения зависимы, модель AR(1).
 
@@ -247,8 +252,8 @@ static err_t rngReadTimer(size_t* read, void* buf, size_t count)
 Системный источник
 
 Системный источник Windows -- это функция CryptGenRandom() поверх
-стандартного криптопровайдера PROV_RSA_FULL. Системный источник Unix -- 
-это файл dev/urandom. 
+стандартного криптопровайдера PROV_RSA_FULL. Системный источник Unix --
+это файл dev/urandom.
 
 Обсуждение (и критика) источников:
 [1]	http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.124.6557
@@ -258,10 +263,10 @@ static err_t rngReadTimer(size_t* read, void* buf, size_t count)
 
 \remark Файл dev/random -- это, так называемый, блокирующий источник,
 который не выдает данные, пока не будет накоплено достаточно энтропии.
-Именно этот источник рекомендуется использовать в криптографических 
-приложениях. Однако в наших экспериментах чтение из файла dev/random иногда 
-выполнялось экстремально долго (возможно это связано с тем, что программы 
-запускались под виртуальной машиной). Поэтому было решено использовать файл 
+Именно этот источник рекомендуется использовать в криптографических
+приложениях. Однако в наших экспериментах чтение из файла dev/random иногда
+выполнялось экстремально долго (возможно это связано с тем, что программы
+запускались под виртуальной машиной). Поэтому было решено использовать файл
 dev/urandom. Это неблокирующий источник, который всегда выдает данные.
 
 \todo http://www.2uo.de/myths-about-urandom/
@@ -424,7 +429,7 @@ bool_t rngTestFIPS4(const octet buf[2500])
 *******************************************************************************
 */
 
-err_t rngReadSource(size_t* read, void* buf, size_t count, 
+err_t rngReadSource(size_t* read, void* buf, size_t count,
 	const char* source_name)
 {
 	if (strEq(source_name, "trng"))
@@ -440,13 +445,13 @@ err_t rngReadSource(size_t* read, void* buf, size_t count,
 *******************************************************************************
 Создание / закрытие генератора
 
-\warning CoverityScan выдает предупреждение по функции rngCreate(): 
+\warning CoverityScan выдает предупреждение по функции rngCreate():
 	"Call to RngReadSource might sleep while holding lock _mtx".
 См. пояснения в комментариях к функции rngStepR().
 *******************************************************************************
 */
 
-typedef struct 
+typedef struct
 {
 	octet block[32];			/*< дополнительные данные brngCTR */
 	octet alg_state[];			/*< [MAX(beltHash_keep(), brngCTR_keep())] */
@@ -546,14 +551,14 @@ void rngClose()
 *******************************************************************************
 Генерация
 
-\warning CoverityScan выдает предупреждение по функции rngStepR(): 
+\warning CoverityScan выдает предупреждение по функции rngStepR():
 	"Call to RngReadSource might sleep while holding lock _mtx"
-с объяснениями: 
-	"The lock will prevent other threads from making progress for 
-	an indefinite period of time; may be mistaken for deadlock. In rngStepR: 
-	A lock is held while waiting for a long running or blocking operation 
+с объяснениями:
+	"The lock will prevent other threads from making progress for
+	an indefinite period of time; may be mistaken for deadlock. In rngStepR:
+	A lock is held while waiting for a long running or blocking operation
 	to complete (CWE-667)".
-Проблема в том, что в источнике timer многократно вызывается 
+Проблема в том, что в источнике timer многократно вызывается
 функция mtSleep(0).
 *******************************************************************************
 */
