@@ -112,7 +112,7 @@ void memNeg(
 	\return Указатель на блок памяти или 0, если памяти не хватает.
 	\remark Блок выделяется, даже если count == 0.
 */
-int* memAlloc(
+void* memAlloc(
 	size_t count		/*!< [in] размер блока */
 );
 

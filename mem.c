@@ -98,7 +98,7 @@ void memNeg(void* buf, size_t count)
 	}
 }
 
-int* memAlloc(size_t count)
+void* memAlloc(size_t count)
 {
 #ifdef OS_WIN
 	return HeapAlloc(GetProcessHeap(), 0, count);
